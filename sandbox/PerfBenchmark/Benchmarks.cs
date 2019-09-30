@@ -77,6 +77,12 @@ namespace PerfBenchmark
         {
             return utf8.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(obj1));
         }
+
+        [Benchmark]
+        public byte[] SystemTextJson()
+        {
+            return System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(obj1);
+        }
     }
 
     [Config(typeof(BenchmarkConfig))]
@@ -152,5 +158,12 @@ namespace PerfBenchmark
         {
             return NetJSON.NetJSON.Deserialize<TargetClass>(utf8.GetString(json));
         }
+
+        [Benchmark]
+        public TargetClass SystemTextJson()
+        {
+            return System.Text.Json.JsonSerializer.Deserialize<TargetClass>(json);
+        }
+
     }
 }

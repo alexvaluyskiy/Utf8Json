@@ -5,7 +5,6 @@ using Utf8Json;
 using Jil;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using BenchmarkDotNet.Attributes.Jobs;
 
 namespace PerfBenchmark
 {
@@ -91,6 +90,15 @@ namespace PerfBenchmark
             for (int i = 0; i < LoopNum; i++)
             {
                 Utf8Json.JsonSerializer.Deserialize<MyModel>(jsonBytes);
+            }
+        }
+
+        [Benchmark]
+        public void SystemTextJson()
+        {
+            for (int i = 0; i < LoopNum; i++)
+            {
+                System.Text.Json.JsonSerializer.Deserialize<TargetClass>(jsonBytes);
             }
         }
     }
